@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arek Banyuwangi - Web & Design Solutions</title>
+    <link href="https://cdn.fontsource.com/font/inter/latin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #10b981;
+            --primary-blue: #3b82f6;
+            --gradient-main: linear-gradient(135deg, #10b981, #3b82f6);
+            --gradient-main-hover: linear-gradient(135deg, #059669, #2563eb);
+            --bg-primary: #ffffff;
+            --bg-secondary: #f0fdf4;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f0fdf4;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+            --shadow-xl: 0 20px 50px rgba(0,0,0,0.15);
+            --nav-bg: rgba(255,255,255,0.95);
+            --overlay-bg: rgba(255,255,255,0.9);
+            --input-bg: #ffffff;
+            --badge-bg: #ecfdf5;
+            --badge-text: #059669;
+            --footer-bg: #1a1a2e;
+            --footer-text: #cbd5e1;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 14px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
+            --shadow-xl: 0 20px 50px rgba(0,0,0,0.6);
+            --nav-bg: rgba(15,23,42,0.95);
+            --overlay-bg: rgba(15,23,42,0.9);
+            --input-bg: #1e293b;
+            --badge-bg: #064e3b;
+            --badge-text: #34d399;
+            --footer-bg: #020617;
+            --footer-text: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-green);
+            background: var(--bg-secondary);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .lang-dropdown {
+            position: relative;
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            min-width: 140px;
+            z-index: 100;
+        }
+
+        .lang-menu.show {
+            display: block;
+            animation: fadeInDown 0.2s ease;
+        }
+
+        .lang-option {
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-option:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-green);
+        }
+
+        .lang-option.active {
+            background: var(--bg-secondary);
+            color: var(--primary-green);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border: none;
+            background: none;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 16px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background: var(--bg-secondary);
+            color: var(--primary-green);
+        }
+
+        /* ===== PAGE CONTAINER ===== */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 72px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-main-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            border-radius: 10px;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 80px 24px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== COMPANY PROFILE ===== */
+        .company-hero {
+            background: var(--bg-secondary);
+            padding: 100px 24px 60px;
+            text-align: center;
+        }
+
+        .company-logo-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .company-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-green);
+        }
+
+        .info-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-main);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 36px;
+            padding-left: 20px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -33px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 3px var(--primary-green);
+        }
+
+        .timeline-year {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Motto Banner */
+        .motto-banner {
+            background: var(--gradient-main);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+            color: white;
+            margin-top: 48px;
+        }
+
+        .motto-text {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .motto-author {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        /* ===== EMPLOYEE SECTION ===== */
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .employee-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .employee-img-wrapper {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .employee-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .employee-card:hover .employee-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .employee-info {
+            padding: 20px;
+        }
+
+        .employee-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .employee-role {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .employee-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            padding: 4px 12px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Employee Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            max-width: 560px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: scaleIn 0.3s ease;
+        }
+
+        .modal-header {
+            position: relative;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .modal-body h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .modal-body .modal-role {
+            color: var(--primary-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .modal-body .modal-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-skills-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        /* ===== CATALOG ===== */
+        .catalog-filters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-main);
+            color: white;
+            border-color: transparent;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-img-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            background: var(--gradient-main);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-body {
+            padding: 24px;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-price .price-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            -webkit-text-fill-color: var(--text-muted);
+            display: block;
+        }
+
+        .btn-order {
+            padding: 10px 24px;
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16,185,129,0.3);
+        }
+
+        /* ===== ORDER PAGE ===== */
+        .order-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .order-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .order-back:hover {
+            color: var(--primary-green);
+        }
+
+        .order-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .order-product-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .order-details h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .order-category {
+            color: var(--primary-green);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .order-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .order-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .order-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        .order-features li i {
+            color: var(--primary-green);
+            font-size: 0.85rem;
+        }
+
+        .order-price-box {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .order-price-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .order-price-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* ===== CUSTOMER SERVICE PAGE ===== */
+        .cs-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+            text-align: center;
+        }
+
+        .cs-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .cs-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .cs-desc {
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        .cs-channels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .cs-channel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .cs-channel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-green);
+        }
+
+        .cs-channel-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.3rem;
+        }
+
+        .cs-channel-icon.whatsapp {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .cs-channel-icon.email {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .cs-channel-icon.phone {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .cs-channel-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .cs-channel-detail {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .cs-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: left;
+        }
+
+        .cs-form h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 0.92rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* ===== FLOATING BUTTONS ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            z-index: 900;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cs-float {
+            position: fixed;
+            bottom: 32px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25d366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            z-index: 900;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .cs-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+        }
+
+        .cs-float-tooltip {
+            position: absolute;
+            right: 72px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .cs-float:hover .cs-float-tooltip {
+            opacity: 1;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 60px 24px 24px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-socials a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--footer-text);
+            text-decoration: none;
+            font-size: 0.88rem;
+            padding: 6px 0;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.82rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero-stats {
+                gap: 32px;
+            }
+
+            .order-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .employee-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 16px;
+                height: 64px;
+            }
+
+            .hero {
+                padding: 40px 16px;
+            }
+
+            .section {
+                padding: 60px 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .employee-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cs-channels {
+                grid-template-columns: 1fr;
+            }
+
+            .motto-banner {
+                padding: 32px 24px;
+            }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 { margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a class="nav-logo" onclick="navigateTo('home')">
+                <img src="assets/A.png" alt="AB Logo">
+                <span class="nav-logo-text">Arek Banyuwangi</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a onclick="navigateTo('home')" class="active" data-page="home" data-i18n="nav_home">Beranda</a></li>
+                <li><a onclick="navigateTo('profile')" data-page="profile" data-i18n="nav_profile">Profil</a></li>
+                <li><a onclick="navigateTo('employees')" data-page="employees" data-i18n="nav_employees">Tim Kami</a></li>
+                <li><a onclick="navigateTo('catalog')" data-page="catalog" data-i18n="nav_catalog">Katalog</a></li>
+                <li><a onclick="navigateTo('customer-service')" data-page="customer-service" data-i18n="nav_cs">Layanan</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <div class="lang-dropdown">
+                    <button class="control-btn" onclick="toggleLangMenu()" title="Bahasa">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <div class="lang-option active" onclick="setLang('id')">🇮🇩 Indonesia</div>
+                        <div class="lang-option" onclick="setLang('en')">🇬🇧 English</div>
+                    </div>
+                </div>
+                <button class="control-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" onclick="toggleMobileNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+        <a onclick="navigateTo('home'); closeMobileNav();" class="active" data-page="home" data-i18n="nav_home">Beranda</a>
+        <a onclick="navigateTo('profile'); closeMobileNav();" data-page="profile" data-i18n="nav_profile">Profil</a>
+        <a onclick="navigateTo('employees'); closeMobileNav();" data-page="employees" data-i18n="nav_employees">Tim Kami</a>
+        <a onclick="navigateTo('catalog'); closeMobileNav();" data-page="catalog" data-i18n="nav_catalog">Katalog</a>
+        <a onclick="navigateTo('customer-service'); closeMobileNav();" data-page="customer-service" data-i18n="nav_cs">Layanan</a>
+    </div>
+
+    <!-- ===== HOME PAGE ===== -->
+    <div class="page active" id="page-home">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span data-i18n="hero_badge">Solusi Digital Terpercaya</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-i18n="hero_title_1">Wujudkan Ide Digital Anda</span><br>
+                    <span class="gradient-text" data-i18n="hero_title_2">Bersama Arek Banyuwangi</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    Kami menyediakan jasa pembuatan website profesional dan jual beli desain website yang berkualitas untuk membantu kebutuhan Anda berkembang di era digital ini.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('catalog')">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span data-i18n="hero_btn_catalog">Lihat Katalog</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="navigateTo('profile')">
+                        <i class="fas fa-building"></i>
+                        <span data-i18n="hero_btn_profile">Tentang Kami</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Services Preview -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-star"></i> <span data-i18n="featured_label">Layanan Unggulan</span></div>
+                    <h2 class="section-title" data-i18n="featured_title">Apa yang Kami Tawarkan</h2>
+                    <p class="section-desc" data-i18n="featured_desc">Solusi lengkap untuk kebutuhan digital bisnis Anda</p>
+                </div>
+                <div class="company-info-grid">
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 data-i18n="feat_web_title">Pembuatan Website</h3>
+                        <p data-i18n="feat_web_desc">Website responsif dan modern dengan teknologi terkini untuk meningkatkan presence online bisnis Anda.</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-palette"></i></div>
+                        <h3 data-i18n="feat_design_title">Desain Grafis</h3>
+                        <p data-i18n="feat_design_desc">Desain visual menarik untuk branding, media sosial, dan kebutuhan marketing digital Anda.</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 data-i18n="feat_app_title">Desain Aplikasi</h3>
+                        <p data-i18n="feat_app_desc">UI/UX design profesional untuk aplikasi mobile yang user-friendly dan intuitif.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section">
+            <div class="section-container">
+                <div class="motto-banner animate-on-scroll">
+                    <div class="motto-text" data-i18n="cta_text">"Inovasi tanpa batas, kualitas tanpa kompromi — kami wujudkan solusi digital terbaik untuk Anda."</div>
+                    <div class="motto-author" data-i18n="cta_author">— Arek Banyuwangi Team</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== PROFILE PAGE ===== -->
+    <div class="page" id="page-profile">
+        <section class="company-hero">
+            <img class="company-logo-large" src="assets/A.png" alt="Arek Banyuwangi Logo">
+            <h1 class="hero-title" style="margin-bottom:12px;">
+                <span class="gradient-text">Arek Banyuwangi</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="profile_hero_desc">
+                Perusahaan penyedia jasa pembuatan web dan jual beli desain profesional, berkomitmen memberikan solusi digital terbaik untuk pertumbuhan bisnis dan kebutuhan Anda.
+            </p>
+        </section>
+
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-info-circle"></i> <span data-i18n="profile_info_label">Informasi Perusahaan</span></div>
+                    <h2 class="section-title" data-i18n="profile_info_title">Profil Perusahaan</h2>
+                </div>
+                <div class="company-info-grid">
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-building"></i></div>
+                        <h3 data-i18n="info_name_title">Nama Perusahaan</h3>
+                        <p>Arek Banyuwangi Programming Center</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-calendar"></i></div>
+                        <h3 data-i18n="info_founded_title">Tahun Berdiri</h3>
+                        <p>2026</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3 data-i18n="info_location_title">Lokasi</h3>
+                        <p>Banyuwangi, Indonesia</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-users"></i></div>
+                        <h3 data-i18n="info_team_title">Jumlah Tim</h3>
+                        <p>3+ Profesional</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
+                        <h3 data-i18n="info_email_title">Email</h3>
+                        <p>hello@arekbanyuwangi.id</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-globe"></i></div>
+                        <h3 data-i18n="info_web_title">Website</h3>
+                        <p>www.arekbanyuwangi.id</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-history"></i> <span data-i18n="history_label">Sejarah Kami</span></div>
+                    <h2 class="section-title" data-i18n="history_title">Perjalanan Arek Banyuwangi</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-title" data-i18n="hist_2020_title">Pendirian Perusahaan</div>
+                        <div class="timeline-desc" data-i18n="hist_2020_desc">Arek Banyuwangi didirikan oleh sekelompok anak muda yang memiliki passion di bidang teknologi dan desain digital dengan tujuan memberikan solusi digital terbaik untuk pertumbuhan bisnis dan kebutuhan di era digital.</div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-title" data-i18n="hist_2021_title">Ekspansi Layanan</div>
+                        <div class="timeline-desc" data-i18n="hist_2021_desc">Membuka layanan jual beli desain grafis, jasa pembuatan dan jual beli website dan branding untuk semua klien di seluruh Indonesia.</div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-title" data-i18n="hist_2025_title">Pengembangan Platform</div>
+                        <div class="timeline-desc" data-i18n="hist_2025_desc">Meluncurkan platform katalog digital untuk memudahkan klien memilih layanan dan produk sesuai kebutuhan.</div>
+                    </div>
+                    <div class="timeline-item animate-on-scroll">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-title" data-i18n="hist_2026_title">Menuju Level Baru</div>
+                        <div class="timeline-desc" data-i18n="hist_2026_desc">Berkomitmen menjadi perusahaan digital terpercaya di Indonesia dengan standar kualitas terbaik.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Fields -->
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-cogs"></i> <span data-i18n="fields_label">Bidang Aktif</span></div>
+                    <h2 class="section-title" data-i18n="fields_title">Bidang Keahlian Kami</h2>
+                </div>
+                <div class="company-info-grid">
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-code"></i></div>
+                        <h3 data-i18n="field_webdev">Web Development</h3>
+                        <p data-i18n="field_webdev_desc">Pembuatan website company profile, e-commerce, landing page, dan web application custom.</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h3 data-i18n="field_branding">Branding & Identity</h3>
+                        <p data-i18n="field_branding_desc">Desain logo, brand guideline, business card, dan identitas visual perusahaan.</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                        <h3 data-i18n="field_uiux">UI/UX Design</h3>
+                        <p data-i18n="field_uiux_desc">Desain antarmuka aplikasi mobile dan web dengan pendekatan user-centered design.</p>
+                    </div>
+                    <div class="info-card animate-on-scroll">
+                        <div class="info-card-icon"><i class="fas fa-bullhorn"></i></div>
+                        <h3 data-i18n="field_social">Social Media Design</h3>
+                        <p data-i18n="field_social_desc">Template dan konten visual untuk Instagram, Facebook, dan platform media sosial lainnya.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Motto -->
+        <section class="section" style="background: var(--bg-secondary);">
+            <div class="section-container">
+                <div class="motto-banner animate-on-scroll">
+                    <div class="motto-text" data-i18n="motto_text">"Inovasi tanpa batas, kualitas tanpa kompromi — kami wujudkan solusi digital terbaik untuk Anda."</div>
+                    <div class="motto-author" data-i18n="motto_author">— Arek Banyuwangi</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== EMPLOYEES PAGE ===== -->
+    <div class="page" id="page-employees">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-users"></i> <span data-i18n="team_label">Tim Profesional</span></div>
+                    <h2 class="section-title" data-i18n="team_title">Kenali Tim Kami</h2>
+                    <p class="section-desc" data-i18n="team_desc">Profesional berpengalaman yang siap mewujudkan solusi digital terbaik untuk Anda</p>
+                </div>
+                <div class="employee-grid" id="employeeGrid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== CATALOG PAGE ===== -->
+    <div class="page" id="page-catalog">
+        <section class="section">
+            <div class="section-container">
+                <div class="section-header animate-on-scroll">
+                    <div class="section-label"><i class="fas fa-shopping-bag"></i> <span data-i18n="catalog_label">Katalog Produk</span></div>
+                    <h2 class="section-title" data-i18n="catalog_title">Pilihan Layanan Kami</h2>
+                    <p class="section-desc" data-i18n="catalog_desc">Pilih layanan terbaik yang sesuai dengan kebutuhan bisnis Anda</p>
+                </div>
+
+                <div class="catalog-filters animate-on-scroll">
+                    <button class="filter-btn active" onclick="filterProducts('all')" data-i18n="filter_all">Semua</button>
+                    <button class="filter-btn" onclick="filterProducts('web')" data-i18n="filter_web">Website</button>
+                    <button class="filter-btn" onclick="filterProducts('design')" data-i18n="filter_design">Desain</button>
+                    <button class="filter-btn" onclick="filterProducts('branding')" data-i18n="filter_branding">Jasa</button>
+                </div>
+
+                <div class="product-grid" id="productGrid">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== ORDER PAGE ===== -->
+    <div class="page" id="page-order">
+        <div class="order-container">
+            <a class="order-back" onclick="navigateTo('catalog')">
+                <i class="fas fa-arrow-left"></i>
+                <span data-i18n="order_back">Kembali ke Katalog</span>
+            </a>
+            <div class="order-layout">
+                <div>
+                    <img class="order-product-img" id="orderImg" src="" alt="Product">
+                </div>
+                <div class="order-details">
+                    <div class="order-category" id="orderCategory"></div>
+                    <h1 id="orderTitle"></h1>
+                    <p class="order-desc" id="orderDesc"></p>
+                    <ul class="order-features" id="orderFeatures"></ul>
+                    <div class="order-price-box">
+                        <div class="order-price-label" data-i18n="order_price_label">Mulai dari</div>
+                        <div class="order-price-value" id="orderPrice"></div>
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-whatsapp" onclick="confirmWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                            <span data-i18n="order_whatsapp">Konfirmasi via WhatsApp</span>
+                        </button>
+                        <button class="btn btn-primary" onclick="confirmWhatsApp()" style="background: var(--gradient-main);">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-i18n="order_send">Kirim Pesanan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CUSTOMER SERVICE PAGE ===== -->
+    <div class="page" id="page-customer-service">
+        <div class="cs-container">
+            <div class="cs-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h1 class="cs-title" data-i18n="cs_title">Customer Service</h1>
+            <p class="cs-desc" data-i18n="cs_desc">Tim kami siap membantu Anda. Hubungi kami melalui salah satu saluran di bawah ini atau kirimkan pesan melalui formulir.</p>
+
+            <div class="cs-channels">
+                <a class="cs-channel-card" href="https://wa.me/+6288242747002" target="_blank">
+                    <div class="cs-channel-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                    <div class="cs-channel-name">WhatsApp</div>
+                    <div class="cs-channel-detail">ab_programmingcenter03</div>
+                </a>
+                <a class="cs-channel-card" href="https://www.instagram.com/ab_programmingcenter03/">
+                    <div class="cs-channel-icon email"><i class="fas fa-instagram"></i></div>
+                    <div class="cs-channel-name">Instagram</div>
+                    <div class="cs-channel-detail">@ab_programmingcenter03</div>
+                </a>
+                <a class="cs-channel-card" href="tel:+6288242747002">
+                    <div class="cs-channel-icon phone"><i class="fas fa-phone"></i></div>
+                    <div class="cs-channel-name">Telepon</div>
+                    <div class="cs-channel-detail">+62 882-4274-7002</div>
+                </a>
+            </div>
+
+            <div class="cs-form">
+                <h3 data-i18n="cs_form_title">Kirim Pesan</h3>
+                <div class="form-group">
+                    <label data-i18n="cs_form_name">Nama Lengkap</label>
+                    <input type="text" id="csName" data-i18n-placeholder="cs_form_name_ph" placeholder="Masukkan nama Anda">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="cs_form_email">Email</label>
+                    <input type="email" id="csEmail" data-i18n-placeholder="cs_form_email_ph" placeholder="email@contoh.com">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="cs_form_subject">Subjek</label>
+                    <select id="csSubject">
+                        <option value="general" data-i18n="cs_subject_general">Pertanyaan Umum</option>
+                        <option value="order" data-i18n="cs_subject_order">Pemesanan</option>
+                        <option value="support" data-i18n="cs_subject_support">Dukungan Teknis</option>
+                        <option value="complaint" data-i18n="cs_subject_complaint">Keluhan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="cs_form_message">Pesan</label>
+                    <textarea id="csMessage" data-i18n-placeholder="cs_form_message_ph" placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                </div>
+                <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="submitCSForm()">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-i18n="cs_form_submit">Kirim Pesan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING BUTTONS -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <button class="cs-float" onclick="navigateTo('customer-service')">
+        <i class="fab fa-whatsapp"></i>
+        <span class="cs-float-tooltip" data-i18n="cs_float_tooltip">Hubungi Customer Service</span>
+    </button>
+
+    <!-- EMPLOYEE MODAL -->
+    <div class="modal-overlay" id="employeeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="modalEmpImg" src="" alt="">
+                <button class="modal-close" onclick="closeEmployeeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modalEmpName"></h2>
+                <div class="modal-role" id="modalEmpRole"></div>
+                <p class="modal-desc" id="modalEmpDesc"></p>
+                <div class="modal-skills-title" data-i18n="modal_skills">Keahlian</div>
+                <div class="employee-skills" id="modalEmpSkills"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/A.png" alt="Logo">
+                    <p data-i18n="footer_desc">Arek Banyuwangi adalah perusahaan penyedia jasa pembuatan web dan jual beli desain profesional yang berkomitmen memberikan solusi digital terbaik.</p>
+                    <div class="footer-socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_nav">Navigasi</h4>
+                    <a onclick="navigateTo('home')" data-i18n="nav_home">Beranda</a>
+                    <a onclick="navigateTo('profile')" data-i18n="nav_profile">Profil</a>
+                    <a onclick="navigateTo('employees')" data-i18n="nav_employees">Tim Kami</a>
+                    <a onclick="navigateTo('catalog')" data-i18n="nav_catalog">Katalog</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_services">Layanan</h4>
+                    <a onclick="navigateTo('catalog')" data-i18n="footer_web">Web Development</a>
+                    <a onclick="navigateTo('catalog')" data-i18n="footer_design">Desain Grafis</a>
+                    <a onclick="navigateTo('catalog')" data-i18n="footer_branding">Branding</a>
+                    <a onclick="navigateTo('catalog')" data-i18n="footer_social">Social Media</a>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_contact">Kontak</h4>
+                    <a href="mailto:hello@arekbanyuwangi.id">hello@arekbanyuwangi.id</a>
+                    <a href="tel:+6288242747002">+62 882-4274-7002</a>
+                    <a onclick="navigateTo('customer-service')" data-i18n="nav_cs">Layanan Pelanggan</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Arek Banyuwangi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== DATA =====
+        const COMPANY_PHONE = '6288242747002';
+
+        const employees = [
+            {
+                id: 1,
+                name: 'Rizky Putra',
+                nameEn: 'Rizky Putra',
+                role: 'Frontend Developer & UI UX Designer',
+                roleEn: 'Frontend Developer & UI UX Designer',
+                photo: 'https://img.freepik.com/vektor-premium/siluet-orang-orang-profesional-muda-dengan-setelan-jas-dorong-kembali_645756-1119.jpg?w=360',
+                skills: ['Figma', 'Adobe XD', 'HTML/CSS', 'JavaScript', 'Communication', 'Planning'],
+                skillsEn: ['Figma', 'Adobe XD', 'HTML/CSS', 'JavaScript', 'Communication', 'Planning'],
+                task: 'Frontend Developer, Design & Technical Architect',
+                taskEn: 'Frontend Developer, Design & Technical Architect'
+            },
+            {
+                id: 2,
+                name: 'Yanti Pariyani',
+                nameEn: 'Yanti Pariyani',
+                role: 'Promosi, Konsultan & UI UX Designer',
+                roleEn: 'Promoter, Consultant & UI UX Designer',
+                photo: 'https://img.freepik.com/vektor-premium/siluet-wanita-kantoran-mengenakan-hijab-dengan-laptop_640834-160.jpg',
+                skills: ['Figma', 'Tiktok Ads', 'Instagram Ads', 'Facebook Ads'],
+                skillsEn: ['Figma', 'Tiktok Ads', 'Instagram Ads', 'Facebook Ads'],
+                desc: 'Desainer kreatif dengan passion dalam menciptakan pengalaman pengguna yang intuitif dan menarik juga berpengalaman di bidang promosi dan konsultasi.',
+                descEn: 'Creative designer with a passion for creating intuitive and engaging user experiences and experience in promotion and consultation.',
+                task: 'Lead Promotion, UI/UX Designer & Creative Director',
+                taskEn: 'Lead Promotion, UI/UX Designer & Creative Director'
+            },
+            {
+                id: 3,
+                name: 'Torra Raffi Helmi',
+                nameEn: 'Torra Raffi Helmi',
+                role: 'Backend Developer',
+                roleEn: 'Backend Developer',
+                photo: 'https://img.freepik.com/foto-premium/siluet-orang-orang-profesional-muda_567115-233.jpg?w=360',
+                skills: ['Java', 'PHP', 'Node.js', 'Database Management', 'API Development'],
+                skillsEn: ['Java', 'PHP', 'Node.js', 'Database Management', 'API Development'],
+                desc: 'Spesialis backend dengan keahlian dalam membuat sistem yang skalabel dan aman. Menguasai berbagai teknologi backend modern.',
+                descEn: 'Backend specialist skilled in creating scalable and secure systems. Proficient in various modern backend technologies.',
+                task: 'Backend Developer & API Development',
+                taskEn: 'Backend Developer & API Development'
+            }
+        ];
+
+        const products = [
+            {
+                id: 1,
+                category: 'web',
+                title: 'Website Company Profile',
+                titleEn: 'Company Profile Website',
+                desc: 'Website profesional untuk menampilkan profil perusahaan Anda dengan desain modern dan responsif.',
+                descEn: 'Professional website to showcase your company profile with modern and responsive design.',
+                price: 'Rp 3.500.000',
+                priceEn: 'Rp 3,500,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/160da4876-3464-4a7b-b19a-730367ad58b5.png',
+                features: ['Desain responsif & modern', 'SEO friendly', 'CMS management', 'Gratis 1 tahun hosting', 'Support 3 bulan'],
+                featuresEn: ['Responsive & modern design', 'SEO friendly', 'CMS management', 'Free 1 year hosting', '3 months support'],
+                badge: 'Populer',
+                badgeEn: 'Popular'
+            },
+            {
+                id: 2,
+                category: 'design',
+                title: 'Desain Aplikasi Mobile',
+                titleEn: 'Mobile App Design',
+                desc: 'Desain UI/UX profesional untuk aplikasi mobile iOS dan Android dengan pendekatan user-centered.',
+                descEn: 'Professional UI/UX design for iOS and Android mobile apps with user-centered approach.',
+                price: 'Rp 5.000.000',
+                priceEn: 'Rp 5,000,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/192d38d0f-8f96-4179-ae8d-1418e9209978.png',
+                features: ['User research & analysis', 'Wireframe & prototype', 'High-fidelity mockup', 'Design system', 'Revisi 3x'],
+                featuresEn: ['User research & analysis', 'Wireframe & prototype', 'High-fidelity mockup', 'Design system', '3x revisions'],
+                badge: 'Baru',
+                badgeEn: 'New'
+            },
+            {
+                id: 3,
+                category: 'branding',
+                title: 'Paket Desain Logo',
+                titleEn: 'Logo Design Package',
+                desc: 'Desain logo profesional dengan beberapa variasi dan format file lengkap untuk kebutuhan branding.',
+                descEn: 'Professional logo design with multiple variations and complete file formats for branding needs.',
+                price: 'Rp 1.500.000',
+                priceEn: 'Rp 1,500,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/1d4cd9444-68af-4c60-835c-e8a460f23431.png',
+                features: ['3 konsep desain', 'Revisi unlimited', 'Format AI, SVG, PNG, JPG', 'Brand guideline', 'File source'],
+                featuresEn: ['3 design concepts', 'Unlimited revisions', 'AI, SVG, PNG, JPG formats', 'Brand guideline', 'Source files'],
+                badge: 'Best Seller',
+                badgeEn: 'Best Seller'
+            },
+            {
+                id: 4,
+                category: 'web',
+                title: 'Website E-Commerce',
+                titleEn: 'E-Commerce Website',
+                desc: 'Platform toko online lengkap dengan fitur keranjang belanja, pembayaran, dan manajemen produk.',
+                descEn: 'Complete online store platform with shopping cart, payment, and product management features.',
+                price: 'Rp 8.000.000',
+                priceEn: 'Rp 8,000,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/12cbe1b64-9386-44f7-96d0-dd1a62fb29ac.png',
+                features: ['Shopping cart system', 'Payment gateway', 'Product management', 'Order tracking', 'Admin dashboard'],
+                featuresEn: ['Shopping cart system', 'Payment gateway', 'Product management', 'Order tracking', 'Admin dashboard'],
+                badge: 'Premium',
+                badgeEn: 'Premium'
+            },
+            {
+                id: 5,
+                category: 'branding',
+                title: 'Brand Identity Kit',
+                titleEn: 'Brand Identity Kit',
+                desc: 'Paket identitas brand lengkap termasuk logo, kartu nama, kop surat, dan amplop perusahaan.',
+                descEn: 'Complete brand identity package including logo, business cards, letterhead, and company envelope.',
+                price: 'Rp 3.000.000',
+                priceEn: 'Rp 3,000,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/171f401d2-c067-401b-90f9-027e2d0cfc08.png',
+                features: ['Logo & variasi', 'Business card design', 'Letterhead design', 'Envelope design', 'Brand guideline book'],
+                featuresEn: ['Logo & variations', 'Business card design', 'Letterhead design', 'Envelope design', 'Brand guideline book'],
+                badge: 'Lengkap',
+                badgeEn: 'Complete'
+            },
+            {
+                id: 6,
+                category: 'design',
+                title: 'Desain Media Sosial',
+                titleEn: 'Social Media Design',
+                desc: 'Template dan konten visual menarik untuk Instagram, Facebook, dan platform media sosial lainnya.',
+                descEn: 'Attractive templates and visual content for Instagram, Facebook, and other social media platforms.',
+                price: 'Rp 800.000',
+                priceEn: 'Rp 800,000',
+                image: 'https://image.qwenlm.ai/public_source/3dc9086a-8b8c-4290-9960-cf937e77c246/161c6eb69-e5d2-436b-b04c-ec6fcf185ef1.png',
+                features: ['15 template desain', 'Format feed & story', 'Editable source file', 'Revisi 2x', 'Brand consistency'],
+                featuresEn: ['15 design templates', 'Feed & story format', 'Editable source file', '2x revisions', 'Brand consistency'],
+                badge: 'Hemat',
+                badgeEn: 'Value'
+            }
+        ];
+
+        // ===== STATE =====
+        let currentLang = 'id';
+        let currentTheme = 'light';
+        let currentProduct = null;
+        let currentPage = 'home';
+
+        // ===== TRANSLATIONS =====
+        const translations = {
+            id: {
+                nav_home: 'Beranda',
+                nav_profile: 'Profil',
+                nav_employees: 'Tim Kami',
+                nav_catalog: 'Katalog',
+                nav_cs: 'Layanan',
+                hero_badge: 'Solusi Digital Terpercaya',
+                hero_title_1: 'Wujudkan Ide Digital Anda',
+                hero_title_2: 'Bersama Arek Banyuwangi',
+                hero_subtitle: 'Kami menyediakan jasa pembuatan website profesional dan jual beli desain website yang berkualitas untuk membantu kebutuhan Anda berkembang di era digital ini.',
+                hero_btn_catalog: 'Lihat Katalog',
+                hero_btn_profile: 'Tentang Kami',
+                stat_projects: 'Proyek Selesai',
+                stat_clients: 'Klien Puas',
+                stat_years: 'Tahun Pengalaman',
+                stat_support: 'Dukungan',
+                featured_label: 'Layanan Unggulan',
+                featured_title: 'Apa yang Kami Tawarkan',
+                featured_desc: 'Solusi lengkap untuk kebutuhan digital bisnis Anda',
+                feat_web_title: 'Pembuatan Website',
+                feat_web_desc: 'Website responsif dan modern dengan teknologi terkini untuk meningkatkan presence online bisnis Anda.',
+                feat_design_title: 'Desain Grafis',
+                feat_design_desc: 'Desain visual menarik untuk branding, media sosial, dan kebutuhan marketing digital Anda.',
+                feat_app_title: 'Desain Aplikasi',
+                feat_app_desc: 'UI/UX design profesional untuk aplikasi mobile yang user-friendly dan intuitif.',
+                cta_text: '"Inovasi tanpa batas, kualitas tanpa kompromi — kami wujudkan solusi digital terbaik untuk Anda."',
+                cta_author: '—Arek Banyuwangi Team',
+                profile_hero_desc: 'Perusahaan penyedia jasa pembuatan web dan jual beli desain profesional, berkomitmen memberikan solusi digital terbaik untuk pertumbuhan bisnis Anda.',
+                profile_info_label: 'Informasi Perusahaan',
+                profile_info_title: 'Profil Perusahaan',
+                info_name_title: 'Nama Perusahaan',
+                info_founded_title: 'Tahun Berdiri',
+                info_location_title: 'Lokasi',
+                info_team_title: 'Jumlah Tim',
+                info_email_title: 'Email',
+                info_web_title: 'Website',
+                history_label: 'Sejarah Kami',
+                history_title: 'Perjalanan Arek Banyuwangi',
+                hist_2020_title: 'Pendirian Perusahaan',
+                hist_2020_desc: 'Arek Banyuwangi didirikan oleh sekelompok anak muda yang memiliki passion di bidang teknologi dan desain digital dengan tujuan memberikan solusi digital terbaik untuk pertumbuhan bisnis dan kebutuhan di era digital.',
+                hist_2021_title: 'Ekspansi Layanan',
+                hist_2021_desc: 'Membuka layanan jual beli desain grafis, jasa pembuatan dan jual beli website dan branding untuk semua klien di seluruh Indonesia.',
+                hist_2023_title: 'Milestone 100 Proyek',
+                hist_2023_desc: 'Berhasil menyelesaikan lebih dari 100 proyek untuk klien dari berbagai industri di Indonesia.',
+                hist_2025_title: 'Pengembangan Platform',
+                hist_2025_desc: 'Meluncurkan platform katalog digital untuk memudahkan klien memilih layanan dan produk sesuai kebutuhan.',
+                hist_2026_title: 'Menuju Level Baru',
+                hist_2026_desc: 'Berkomitmen menjadi perusahaan digital terpercaya di Indonesia dengan standar kualitas terbaik.',
+                fields_label: 'Bidang Aktif',
+                fields_title: 'Bidang Keahlian Kami',
+                field_webdev: 'Web Development',
+                field_webdev_desc: 'Pembuatan website company profile, e-commerce, landing page, dan web application custom.',
+                field_branding: 'Branding & Identity',
+                field_branding_desc: 'Desain logo, brand guideline, business card, dan identitas visual perusahaan.',
+                field_uiux: 'UI/UX Design',
+                field_uiux_desc: 'Desain antarmuka aplikasi mobile dan web dengan pendekatan user-centered design.',
+                field_social: 'Social Media Design',
+                field_social_desc: 'Template dan konten visual untuk Instagram, Facebook, dan platform media sosial lainnya.',
+                motto_text: '"Inovasi tanpa batas, kualitas tanpa kompromi — kami wujudkan solusi digital terbaik untuk Anda."',
+                motto_author: '— Arek Banyuwangi Team',
+                team_label: 'Tim Profesional',
+                team_title: 'Kenali Tim Kami',
+                team_desc: 'Profesional berpengalaman yang siap mewujudkan solusi digital terbaik untuk Anda',
+                catalog_label: 'Katalog Produk',
+                catalog_title: 'Pilihan Layanan Kami',
+                catalog_desc: 'Pilih layanan terbaik yang sesuai dengan kebutuhan bisnis Anda',
+                filter_all: 'Semua',
+                filter_web: 'Website',
+                filter_design: 'Desain',
+                filter_branding: 'Jasa',
+                btn_order: 'Pesan',
+                order_back: 'Kembali ke Katalog',
+                order_price_label: 'Mulai dari',
+                order_whatsapp: 'Konfirmasi via WhatsApp',
+                order_send: 'Kirim Pesanan',
+                cs_title: 'Customer Service',
+                cs_desc: 'Tim kami siap membantu Anda. Hubungi kami melalui salah satu saluran di bawah ini atau kirimkan pesan melalui formulir.',
+                cs_form_title: 'Kirim Pesan',
+                cs_form_name: 'Nama Lengkap',
+                cs_form_name_ph: 'Masukkan nama Anda',
+                cs_form_email: 'Email',
+                cs_form_email_ph: 'email@contoh.com',
+                cs_form_subject: 'Subjek',
+                cs_subject_general: 'Pertanyaan Umum',
+                cs_subject_order: 'Pemesanan',
+                cs_subject_support: 'Dukungan Teknis',
+                cs_subject_complaint: 'Keluhan',
+                cs_form_message: 'Pesan',
+                cs_form_message_ph: 'Tuliskan pesan Anda di sini...',
+                cs_form_submit: 'Kirim Pesan',
+                cs_float_tooltip: 'Hubungi Customer Service',
+                footer_desc: 'Arek Banyuwangi adalah perusahaan penyedia jasa pembuatan web dan jual beli desain profesional yang berkomitmen memberikan solusi digital terbaik.',
+                footer_nav: 'Navigasi',
+                footer_services: 'Layanan',
+                footer_web: 'Web Development',
+                footer_design: 'Desain Grafis',
+                footer_branding: 'Branding',
+                footer_social: 'Social Media',
+                footer_contact: 'Kontak',
+                modal_skills: 'Keahlian'
+            },
+            en: {
+                nav_home: 'Home',
+                nav_profile: 'Profile',
+                nav_employees: 'Our Team',
+                nav_catalog: 'Catalog',
+                nav_cs: 'Services',
+                hero_badge: 'Trusted Digital Solutions',
+                hero_title_1: 'Bring Your Digital Ideas to Life',
+                hero_title_2: 'With Arek Banyuwangi',
+                hero_subtitle: 'We provide professional website development and design trading services that are high quality to help your needs grow in this digital era.',
+                hero_btn_catalog: 'View Catalog',
+                hero_btn_profile: 'About Us',
+                stat_projects: 'Projects Completed',
+                stat_clients: 'Happy Clients',
+                stat_years: 'Years Experience',
+                stat_support: 'Support',
+                featured_label: 'Featured Services',
+                featured_title: 'What We Offer',
+                featured_desc: 'Complete solutions for your business digital needs',
+                feat_web_title: 'Web Development',
+                feat_web_desc: 'Responsive and modern websites with the latest technology to boost your business online presence.',
+                feat_design_title: 'Graphic Design',
+                feat_design_desc: 'Attractive visual designs for branding, social media, and your digital marketing needs.',
+                feat_app_title: 'App Design',
+                feat_app_desc: 'Professional UI/UX design for user-friendly and intuitive mobile applications.',
+                cta_text: '"Innovation without limits, quality without compromise — we deliver the best digital solutions for you."',
+                cta_author: '— Arek Banyuwangi Team',
+                profile_hero_desc: 'A company providing professional web development services and design trading, committed to delivering the best digital solutions for your business growth.',
+                profile_info_label: 'Company Information',
+                profile_info_title: 'Company Profile',
+                info_name_title: 'Company Name',
+                info_founded_title: 'Established',
+                info_location_title: 'Location',
+                info_team_title: 'Team Size',
+                info_email_title: 'Email',
+                info_web_title: 'Website',
+                history_label: 'Our History',
+                history_title: 'Arek Banyuwangi Digital Journey',
+                hist_2020_title: 'Company Founded',
+                hist_2020_desc: 'Arek Banyuwangi was founded by a group of young individuals passionate about technology and digital design with the goal of providing the best digital solutions for business growth and needs in the digital era.',
+                hist_2021_title: 'Service Expansion',
+                hist_2021_desc: 'Launched graphic design trading, website development and trading, and branding services for all clients across Indonesia.',
+                hist_2023_title: '100 Projects Milestone',
+                hist_2023_desc: 'Successfully completed over 100 projects for clients from various industries in Indonesia.',
+                hist_2025_title: 'Platform Development',
+                hist_2025_desc: 'Launched a digital catalog platform to make it easier for clients to choose services and products according to their needs.',
+                hist_2026_title: 'Reaching New Heights',
+                hist_2026_desc: 'Committed to becoming a trusted digital company in Indonesia with the best quality standards.',
+                fields_label: 'Active Fields',
+                fields_title: 'Our Expertise',
+                field_webdev: 'Web Development',
+                field_webdev_desc: 'Company profile websites, e-commerce, landing pages, and custom web applications.',
+                field_branding: 'Branding & Identity',
+                field_branding_desc: 'Logo design, brand guidelines, business cards, and corporate visual identity.',
+                field_uiux: 'UI/UX Design',
+                field_uiux_desc: 'Mobile and web interface design with a user-centered design approach.',
+                field_social: 'Social Media Design',
+                field_social_desc: 'Templates and visual content for Instagram, Facebook, and other social media platforms.',
+                motto_text: '"Innovation without limits, quality without compromise — we deliver the best digital solutions for you."',
+                motto_author: '— Arek Banyuwangi Team',
+                team_label: 'Professional Team',
+                team_title: 'Meet Our Team',
+                team_desc: 'Experienced professionals ready to deliver the best digital solutions for you',
+                catalog_label: 'Product Catalog',
+                catalog_title: 'Our Service Options',
+                catalog_desc: 'Choose the best service that suits your business needs',
+                filter_all: 'All',
+                filter_web: 'Website',
+                filter_design: 'Design',
+                filter_branding: 'Services',
+                btn_order: 'Order',
+                order_back: 'Back to Catalog',
+                order_price_label: 'Starting from',
+                order_whatsapp: 'Confirm via WhatsApp',
+                order_send: 'Send Order',
+                cs_title: 'Customer Service',
+                cs_desc: 'Our team is ready to help you. Contact us through one of the channels below or send a message through the form.',
+                cs_form_title: 'Send Message',
+                cs_form_name: 'Full Name',
+                cs_form_name_ph: 'Enter your name',
+                cs_form_email: 'Email',
+                cs_form_email_ph: 'email@example.com',
+                cs_form_subject: 'Subject',
+                cs_subject_general: 'General Inquiry',
+                cs_subject_order: 'Ordering',
+                cs_subject_support: 'Technical Support',
+                cs_subject_complaint: 'Complaint',
+                cs_form_message: 'Message',
+                cs_form_message_ph: 'Write your message here...',
+                cs_form_submit: 'Send Message',
+                cs_float_tooltip: 'Contact Customer Service',
+                footer_desc: 'Arek Banyuwangi is a professional web development and design trading service provider committed to delivering the best digital solutions.',
+                footer_nav: 'Navigation',
+                footer_services: 'Services',
+                footer_web: 'Web Development',
+                footer_design: 'Graphic Design',
+                footer_branding: 'Branding',
+                footer_social: 'Social Media',
+                footer_contact: 'Contact',
+                modal_skills: 'Skills'
+            }
+        };
+
+        // ===== FUNCTIONS =====
+        function t(key) {
+            return translations[currentLang][key] || key;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
+            renderEmployees();
+            renderProducts();
+            if (currentProduct) renderOrderPage(currentProduct);
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.textContent.includes(lang === 'id' ? 'Indonesia' : 'English'));
+            });
+            document.getElementById('langMenu').classList.remove('show');
+            applyTranslations();
+        }
+
+        function toggleLangMenu() {
+            document.getElementById('langMenu').classList.toggle('show');
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const btn = document.getElementById('themeBtn');
+            btn.innerHTML = currentTheme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        }
+
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page-' + page);
+            if (target) target.classList.add('active');
+
+            document.querySelectorAll('[data-page]').forEach(link => {
+                link.classList.toggle('active', link.getAttribute('data-page') === page);
+            });
+
+            currentPage = page;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            closeLangMenu();
+        }
+
+        function closeLangMenu() {
+            document.getElementById('langMenu').classList.remove('show');
+        }
+
+        // Mobile nav
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            const toggle = document.getElementById('mobileToggle');
+            nav.classList.toggle('show');
+            toggle.classList.toggle('active');
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('show');
+            document.getElementById('mobileToggle').classList.remove('active');
+        }
+
+        // Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const scrollBtn = document.getElementById('scrollTopBtn');
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 400) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+
+            // Animate on scroll
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Close dropdown on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.getElementById('langMenu').classList.remove('show');
+            }
+        });
+
+        // ===== RENDER EMPLOYEES =====
+        function renderEmployees() {
+            const grid = document.getElementById('employeeGrid');
+            grid.innerHTML = employees.map(emp => `
+                <div class="employee-card animate-on-scroll" onclick="openEmployeeModal(${emp.id})">
+                    <div class="employee-img-wrapper">
+                        <img src="${emp.photo}" alt="${currentLang === 'en' ? emp.nameEn : emp.name}">
+                    </div>
+                    <div class="employee-info">
+                        <div class="employee-name">${currentLang === 'en' ? emp.nameEn : emp.name}</div>
+                        <div class="employee-role">${currentLang === 'en' ? emp.roleEn : emp.role}</div>
+                        <div class="employee-skills">
+                            ${(currentLang === 'en' ? emp.skillsEn : emp.skills).slice(0, 3).map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Trigger animation check
+            setTimeout(() => {
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 80) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
+        }
+
+        // ===== EMPLOYEE MODAL =====
+        function openEmployeeModal(id) {
+            const emp = employees.find(e => e.id === id);
+            if (!emp) return;
+
+            document.getElementById('modalEmpImg').src = emp.photo;
+            document.getElementById('modalEmpName').textContent = currentLang === 'en' ? emp.nameEn : emp.name;
+            document.getElementById('modalEmpRole').textContent = currentLang === 'en' ? emp.roleEn : emp.role;
+            document.getElementById('modalEmpDesc').textContent = currentLang === 'en' ? emp.descEn : emp.desc;
+            document.getElementById('modalEmpSkills').innerHTML = (currentLang === 'en' ? emp.skillsEn : emp.skills).map(s => `<span class="skill-tag">${s}</span>`).join('');
+
+            document.getElementById('employeeModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEmployeeModal() {
+            document.getElementById('employeeModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('employeeModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('employeeModal')) closeEmployeeModal();
+        });
+
+        // ===== RENDER PRODUCTS =====
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('productGrid');
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(prod => `
+                <div class="product-card animate-on-scroll" data-category="${prod.category}">
+                    <div class="product-img-wrapper">
+                        <img class="product-img" src="${prod.image}" alt="${currentLang === 'en' ? prod.titleEn : prod.title}">
+                        <span class="product-badge">${currentLang === 'en' ? prod.badgeEn : prod.badge}</span>
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-title">${currentLang === 'en' ? prod.titleEn : prod.title}</h3>
+                        <p class="product-desc">${currentLang === 'en' ? prod.descEn : prod.desc}</p>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price-label">${currentLang === 'en' ? t('order_price_label') : 'Mulai dari'}</span>
+                                ${currentLang === 'en' ? prod.priceEn : prod.price}
+                            </div>
+                            <button class="btn-order" onclick="orderProduct(${prod.id})">
+                                <i class="fas fa-shopping-cart"></i>
+                                ${t('btn_order')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            setTimeout(() => {
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 80) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
+        }
+
+        function filterProducts(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderProducts(category);
+        }
+
+        // ===== ORDER PAGE =====
+        function orderProduct(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod) return;
+            currentProduct = prod;
+            renderOrderPage(prod);
+            navigateTo('order');
+        }
+
+        function renderOrderPage(prod) {
+            document.getElementById('orderImg').src = prod.image;
+            document.getElementById('orderCategory').textContent = currentLang === 'en' ? prod.category.toUpperCase() : prod.category.toUpperCase();
+            document.getElementById('orderTitle').textContent = currentLang === 'en' ? prod.titleEn : prod.title;
+            document.getElementById('orderDesc').textContent = currentLang === 'en' ? prod.descEn : prod.desc;
+            document.getElementById('orderPrice').textContent = currentLang === 'en' ? prod.priceEn : prod.price;
+
+            const featuresList = currentLang === 'en' ? prod.featuresEn : prod.features;
+            document.getElementById('orderFeatures').innerHTML = featuresList.map(f =>
+                `<li><i class="fas fa-check-circle"></i> ${f}</li>`
+            ).join('');
+        }
+
+        function confirmWhatsApp() {
+            if (!currentProduct) return;
+            const title = currentLang === 'en' ? currentProduct.titleEn : currentProduct.title;
+            const price = currentLang === 'en' ? currentProduct.priceEn : currentProduct.price;
+            const msg = currentLang === 'en'
+                ? `Hello Arek Banyuwangi! I'm interested in ordering: ${title} (${price}). Please provide more details.`
+                : `Halo Arek Banyuwangi! Saya tertarik memesan: ${title} (${price}). Mohon informasi lebih lanjut.`;
+            const url = `https://wa.me/${COMPANY_PHONE}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // ===== CUSTOMER SERVICE FORM =====
+        function submitCSForm() {
+            const name = document.getElementById('csName').value.trim();
+            const email = document.getElementById('csEmail').value.trim();
+            const subject = document.getElementById('csSubject').value;
+            const message = document.getElementById('csMessage').value.trim();
+
+            if (!name || !email || !message) {
+                alert(currentLang === 'en' ? 'Please fill in all required fields.' : 'Mohon isi semua field yang diperlukan.');
+                return;
+            }
+
+            const subjectMap = {
+                general: currentLang === 'en' ? 'General Inquiry' : 'Pertanyaan Umum',
+                order: currentLang === 'en' ? 'Ordering' : 'Pemesanan',
+                support: currentLang === 'en' ? 'Technical Support' : 'Dukungan Teknis',
+                complaint: currentLang === 'en' ? 'Complaint' : 'Keluhan'
+            };
+
+            const msg = currentLang === 'en'
+                ? `Customer Service Inquiry\n\nName: ${name}\nEmail: ${email}\nSubject: ${subjectMap[subject]}\n\nMessage:\n${message}`
+                : `Pesan Customer Service\n\nNama: ${name}\nEmail: ${email}\nSubjek: ${subjectMap[subject]}\n\nPesan:\n${message}`;
+
+            const url = `https://wa.me/${COMPANY_PHONE}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+
+            // Reset form
+            document.getElementById('csName').value = '';
+            document.getElementById('csEmail').value = '';
+            document.getElementById('csMessage').value = '';
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEmployees();
+            renderProducts();
+
+            // Trigger initial animations
+            setTimeout(() => {
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 80) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
